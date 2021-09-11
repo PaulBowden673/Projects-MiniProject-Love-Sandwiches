@@ -31,7 +31,6 @@ def get_sales_data():
 
     return sales_data
 
-
 def validate_data(values):
     """
     validates data is 6 numbers 
@@ -49,26 +48,14 @@ def validate_data(values):
     
     return True
 
-
-
-def update_sales_worksheet(data):
+def update_worksheet(data, worksheet):
     """
     Updates worksheet with new row of data
     """
-    print('Updating Worksheet....\n')
-    sales_worksheet = SHEET.worksheet('sales')
-    sales_worksheet.append_row(data)
-    print('Sales Worksheet updated successfully.\n')
-
-def update_surplus_worksheet(data):
-    """
-    Updates worksheet with new row of data
-    """
-    print('Updating Worksheet....\n')
-    surplus_worksheet = SHEET.worksheet('surplus')
-    surplus_worksheet.append_row(data)
-    print('Surplus Worksheet updated successfully.\n')
-
+    print(f'Updating {worksheet} Worksheet...')
+    worksheet_to_update = SHEET.worksheet(worksheet)
+    worksheet_to_update.append_row(data)
+    print(f'{worksheet} Worksheet updated successfully.\n')
 
 def calculate_surplus(sales_row):
     """
@@ -87,18 +74,15 @@ def calculate_surplus(sales_row):
 
     return surplus_data
 
-
 def main():
     """
     Run all program Functions
     """
     data = get_sales_data()
     sales_data = [int(num) for num in data]
-    update_sales_worksheet(sales_data)
+    update_worksheet(sales_data, 'sales')
     new_surplus_data = calculate_surplus(sales_data)
-    update_surplus_worksheet(new_surplus_data)
-
-
+    update_worksheet(new_surplus_data, 'surplus')
 
 print('Welcome to Love Sandwiches Data Robot')
 main()
