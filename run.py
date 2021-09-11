@@ -74,6 +74,20 @@ def calculate_surplus(sales_row):
 
     return surplus_data
 
+def get_last_5_entries_sales():
+    """
+    Gets last 5 entires from sales to get average 
+    """
+    sales = SHEET.worksheet('sales')
+
+    columns = []
+    for ind in range(1,7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+    return columns
+
+
+
 def main():
     """
     Run all program Functions
@@ -85,5 +99,5 @@ def main():
     update_worksheet(new_surplus_data, 'surplus')
 
 print('Welcome to Love Sandwiches Data Robot')
-main()
-
+#main()
+sales_cloumns = get_last_5_entries_sales()
